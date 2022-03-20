@@ -1,0 +1,130 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+canvas {
+    pointer-events: none;
+    border: 3px solid black;
+}
+
+body {
+    height: 100vh;
+    display: grid;
+    justify-content: center;
+    background-color: rgb(36, 36, 36);
+}
+
+#card {
+    z-index: 5;
+}
+
+#card img {
+    width: 300px;
+}
+
+.wrapper {
+    position: relative;
+}
+
+.card-container {
+    position: absolute;
+    width: 1600px;
+    height: 800px;
+    top: 1px;
+    left: 1px;
+}
+
+#start-container {
+    top: 500px;
+    left: 400px;
+}
+
+#start-container-throw {
+    position: relative;
+    left: 1050px;
+    top: 140px;
+    width: 300px;
+    height: 300px;
+}
+
+#start-container-throw img {
+    width: 300px;
+}
+
+#end-container-throw {
+    width: 400px;
+    height: 800px;
+    position: relative;
+    left: 300px;
+    top: -250px;
+}
+
+.wall {
+    width: 400px;
+    height: 600px;
+    background-color: #d7e2e9;
+    position: absolute; 
+    left: 1176px;
+    top: 4px;
+    z-index: 1;
+}
+
+#end-container {
+    width: 300px;
+    height: 300px;
+    left: 750px;
+    top: 300px;
+}
+
+.container {
+    position: absolute;
+}
+
+.bounce {
+	transform: scale(1.1);
+}
+
+.notifications {
+    display: flex;
+    flex-direction: column;
+    font-family: sans-serif;
+    position: absolute;
+    left: 615px;
+    top: 200px;
+}
+
+.notification {
+    width: 260px;
+    border: 1px solid black;
+    border-radius: 10px;
+    padding: 10px;
+    margin: 7px;
+    background-color: white;
+}
+
+.notification p {
+    letter-spacing: 0.5px;
+    margin-top: 10px;
+}
+
+.invisible {
+    display: none;
+}
+
+.phone-button {
+    position: relative;
+    left: 700px;
+    top: 100px;
+    background-color: black;
+    color: white;
+    width: 150px;
+    height: 60px;
+    border-radius: 20px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 20px;
+}
+  

@@ -1,0 +1,231 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="style.css">
+    <title>Interactive Trailer</title>
+</head>
+<body>
+    <header>
+
+    </header>
+    <main>
+        <div class="wrapper">
+            <canvas id="canvas" width="1600" height="800"></canvas>
+            <div class="card-container">
+
+                <!-- Card -->
+                <div class="container" id="start-container">
+                    <div id="card">
+                        <img src="media/svg/card.svg" alt="">
+                    </div>
+                </div>
+                <div class="container" id="end-container"></div>
+
+                <!-- Phone notifications -->
+                <div class="notifications invisible">
+                    <div class="notification" id="boss">
+                        <h4>Boss</h4>
+                        <p>view notification</p>
+                    </div>
+                    <div class="notification" id="mom">
+                        <h4>Mom</h4>
+                        <p>view notification</p>
+                    </div>
+                    <div class="notification" id=gf>
+                        <h4>Girlfriend</h4>
+                        <p>view notification</p>
+                    </div>
+                    <div class="phone-button">Continue</div>
+                </div>
+
+                <!-- Throw scene -->
+                <div class="throw-scene invisible">
+                    <div class="wall"></div>
+                    <div id="start-container-throw">
+                        <div id="character">
+                            <img src="media/svg/thrown-character.svg" alt="">
+                        </div>
+                    </div>
+                    <div id="end-container-throw"></div>
+                </div>
+                
+            </div>
+        </div>
+    </main>
+    <script src="https://unpkg.com/@rive-app/webgl"></script>
+    <script src="https://cdn.jsdelivr.net/npm/agnostic-draggable@latest/dist/agnostic-draggable.min.js"></script>
+
+    <script>
+
+        const card = document.getElementById("card")
+        const container = document.querySelector('.container')
+        const endContainer = document.querySelector('#end-container')
+        const notifications = document.querySelector('.notifications')
+
+        let swipe = ''
+        let doneReading = ''
+        let thrown = ''
+        let thrownMessage = ''
+        let cracked = ''
+        let firstCrack = ''
+        let secondCrack = ''
+        let thirdCrack = ''
+        let titleTrigger = ''
+
+        // Card machine
+        function sceneClick(obj,trigger) {
+            obj.classList.remove('invisible')
+            trigger.fire()
+        }
+
+        new agnosticDraggable.Draggable(card, {
+            appendTo: 'body',
+            containment: 'card-container',
+            cursor: 'move',
+            distance: 10,
+            helper: 'original',
+            opacity: 1,
+        });
+
+        new agnosticDraggable.Droppable(endContainer,{}, {
+            'droppable:drop': function (e) {
+                swipe.fire()
+                container.style.display = 'none'
+                setTimeout(function() {
+                    sceneClick(notifications,phoneTrigger)
+                }, 3500)
+            }
+        });
+
+        // Notifications
+        const bossMessage = document.getElementById('boss')
+        const momMessage = document.getElementById('mom')
+        const gfMessage = document.getElementById('gf')
+        const phoneButton = document.querySelector('.phone-button')
+
+        bossMessage.addEventListener('click', function() {
+            const paragraph = bossMessage.children[1]
+
+            if (paragraph.innerHTML === "view notification") {
+                paragraph.innerHTML = "Apologies Bao, it seems your salary will be reflecting a bit late this month. By the way, have you finished my Powerpoint presentation yet?"
+                momMessage.children[1].innerHTML = "view notification"
+                gfMessage.children[1].innerHTML = "view notification"
+            }
+            else 
+                paragraph.innerHTML = "view notification"
+        })
+
+        momMessage.addEventListener('click', function() {
+            const paragraph = momMessage.children[1]
+
+            if (paragraph.innerHTML === "view notification") {
+                paragraph.innerHTML = "Have you heard that your brother has just found the cure for Cancer? He is such an astounding young boy, why can't you be more like him Bao?"
+                bossMessage.children[1].innerHTML = "view notification"
+                gfMessage.children[1].innerHTML = "view notification"
+            }
+            else 
+                paragraph.innerHTML = "view notification"
+        })
+
+        gfMessage.addEventListener('click', function() {
+            const paragraph = gfMessage.children[1]
+
+            if (paragraph.innerHTML === "view notification") {
+                paragraph.innerHTML = "Bao, I don't think this is going to work out anymore... How can you support our future family when you can't even support yourself..."
+                bossMessage.children[1].innerHTML = "view notification"
+                momMessage.children[1].innerHTML = "view notification"
+            }
+            else 
+                paragraph.innerHTML = "view notification"
+        })
+
+        phoneButton.addEventListener('click', function() {
+            doneReading.fire()
+            notifications.style.display = 'none'
+            setTimeout(function() {
+                    sceneClick(throwContainer,thrownTrigger)
+                }, 3500)
+        })
+
+        // Thrown out
+        const character = document.getElementById("character")
+        const endContainerThrow = document.getElementById("end-container-throw")
+        const throwContainer = document.querySelector('.throw-scene')
+
+        new agnosticDraggable.Draggable(character, {
+            appendTo: 'body',
+            containment: 'card-container',
+            cursor: 'move',
+            distance: 10,
+            helper: 'original',
+            opacity: 1,
+        });
+
+        function crackedClick() {
+            crackedTrigger.fire()
+
+            let count = 0
+            window.addEventListener('keypress', function(e) {
+                if (e) count++
+
+                if (count === 5) {
+                    firstCrack.fire()
+                }
+                else if (count === 10) {
+                    secondCrack.fire()
+                }
+                else if (count === 15) {
+                    thirdCrack.fire()
+                }
+                else if (count === 20) {
+                    cracked.fire()
+                    setTimeout(function() {
+                        titleTrigger.fire()
+                    }, 3500)
+                }
+            })
+        }
+
+        new agnosticDraggable.Droppable(endContainerThrow,{}, {
+            'droppable:drop': function (e) {
+                thrown.fire()
+
+                setTimeout(function() {
+                    thrownMessage.fire()
+                    throwContainer.style.display = "none"
+                    setTimeout(function() {
+                        crackedClick()
+                    }, 3500)  
+                }, 1500)
+                     
+            }
+        });
+
+        const r = new rive.Rive({
+            src: "trailer.riv",
+            canvas: document.getElementById("canvas"),
+            autoplay: true,
+            stateMachines: 'state-machine',
+            fit: rive.Fit.cover,
+            onLoad: () => {
+                const inputs = r.stateMachineInputs('state-machine')
+                swipe = inputs.find(i => i.name === 'swipe')
+                doneReading = inputs.find(i => i.name === 'done-reading')
+                thrown = inputs.find(i => i.name === 'thrown')
+                firstCrack = inputs.find(i => i.name === 'first-crack')
+                secondCrack = inputs.find(i => i.name === 'second-crack')
+                thirdCrack = inputs.find(i => i.name === 'third-crack')
+                cracked = inputs.find(i => i.name === 'cracked')
+                phoneTrigger = inputs.find(i => i.name === 'phone-trigger')
+                thrownTrigger = inputs.find(i => i.name === 'thrown-trigger')
+                crackedTrigger = inputs.find(i => i.name === 'cracked-trigger')
+                thrownMessage = inputs.find(i => i.name === 'thrown-message')
+                titleTrigger = inputs.find(i => i.name === 'title-trigger')
+            }
+        });
+    </script>
+</body>
+</html>
