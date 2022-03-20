@@ -24,6 +24,16 @@ body {
     width: 300px;
 }
 
+#typed {
+    position: relative;
+    font-size: 50px;
+    color: white;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    letter-spacing: 1px;
+    left: 30px;
+    top: 30px;
+}
+
 .wrapper {
     position: relative;
 }
@@ -113,18 +123,5 @@ body {
     display: none;
 }
 
-.phone-button {
-    position: relative;
-    left: 700px;
-    top: 100px;
-    background-color: black;
-    color: white;
-    width: 150px;
-    height: 60px;
-    border-radius: 20px;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    font-size: 20px;
-}
+
   

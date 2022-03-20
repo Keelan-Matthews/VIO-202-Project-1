@@ -15,7 +15,7 @@
         <div class="wrapper">
             <canvas id="canvas" width="1600" height="800"></canvas>
             <div class="card-container">
-
+                <span id="typed"></span>
                 <!-- Card -->
                 <div class="container" id="start-container">
                     <div id="card">
@@ -38,7 +38,6 @@
                         <h4>Girlfriend</h4>
                         <p>view notification</p>
                     </div>
-                    <div class="phone-button">Continue</div>
                 </div>
 
                 <!-- Throw scene -->
@@ -57,6 +56,7 @@
     </main>
     <script src="https://unpkg.com/@rive-app/webgl"></script>
     <script src="https://cdn.jsdelivr.net/npm/agnostic-draggable@latest/dist/agnostic-draggable.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/typed.js@2.0.12"></script>
 
     <script>
 
@@ -93,6 +93,13 @@
         new agnosticDraggable.Droppable(endContainer,{}, {
             'droppable:drop': function (e) {
                 swipe.fire()
+
+                let typed1 = new Typed('#typed', {
+                    strings: ["There's only so much...", " "],
+                    showCursor: false,
+                    typeSpeed: 20
+                });
+
                 container.style.display = 'none'
                 setTimeout(function() {
                     sceneClick(notifications,phoneTrigger)
@@ -104,7 +111,6 @@
         const bossMessage = document.getElementById('boss')
         const momMessage = document.getElementById('mom')
         const gfMessage = document.getElementById('gf')
-        const phoneButton = document.querySelector('.phone-button')
 
         bossMessage.addEventListener('click', function() {
             const paragraph = bossMessage.children[1]
@@ -122,7 +128,7 @@
             const paragraph = momMessage.children[1]
 
             if (paragraph.innerHTML === "view notification") {
-                paragraph.innerHTML = "Have you heard that your brother has just found the cure for Cancer? He is such an astounding young boy, why can't you be more like him Bao?"
+                paragraph.innerHTML = "Have you heard that your brother has just found the cure for Cancer? He is such an astounding young man, why can't you be more like him Bao?"
                 bossMessage.children[1].innerHTML = "view notification"
                 gfMessage.children[1].innerHTML = "view notification"
             }
@@ -140,14 +146,21 @@
             }
             else 
                 paragraph.innerHTML = "view notification"
-        })
 
-        phoneButton.addEventListener('click', function() {
-            doneReading.fire()
-            notifications.style.display = 'none'
             setTimeout(function() {
+                doneReading.fire()
+                notifications.style.display = 'none'
+
+                typed1 = new Typed('#typed', {
+                        strings: ["a dog can handle...", " "],
+                        showCursor: false,
+                        typeSpeed: 0
+                    });
+
+                setTimeout(function() {
                     sceneClick(throwContainer,thrownTrigger)
                 }, 3500)
+            }, 5000)
         })
 
         // Thrown out
@@ -182,6 +195,13 @@
                 }
                 else if (count === 20) {
                     cracked.fire()
+
+                    let typed3 = new Typed('#typed', {
+                        strings: ["before resolving...", " "],
+                        showCursor: false,
+                        typeSpeed: 20
+                    });
+
                     setTimeout(function() {
                         titleTrigger.fire()
                     }, 3500)
@@ -192,6 +212,12 @@
         new agnosticDraggable.Droppable(endContainerThrow,{}, {
             'droppable:drop': function (e) {
                 thrown.fire()
+
+                let typed4 = new Typed('#typed', {
+                    strings: ["to their instincts.", " "],
+                    showCursor: false,
+                    typeSpeed: 20
+                });
 
                 setTimeout(function() {
                     thrownMessage.fire()
