@@ -25,7 +25,7 @@
                 <div class="container" id="end-container"></div>
 
                 <!-- Phone notifications -->
-                <div class="notifications invisible">
+                <div class="notifications invisible custom-cursor">
                     <div class="notification" id="boss">
                         <h4>Boss</h4>
                         <p>view notification</p>
@@ -56,7 +56,6 @@
     </main>
     <script src="https://unpkg.com/@rive-app/webgl"></script>
     <script src="https://cdn.jsdelivr.net/npm/agnostic-draggable@latest/dist/agnostic-draggable.min.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/typed.js@2.0.12"></script>
 
     <script>
 
@@ -64,6 +63,7 @@
         const container = document.querySelector('.container')
         const endContainer = document.querySelector('#end-container')
         const notifications = document.querySelector('.notifications')
+        const typed = document.querySelector('#typed')
 
         let swipe = ''
         let doneReading = ''
@@ -75,6 +75,16 @@
         let thirdCrack = ''
         let titleTrigger = ''
 
+        let i = 0
+        let speed = 50
+        txt = "There's only so much..."
+        function typewriter() {
+            if (i < txt.length) {
+                typed.innerHTML += txt.charAt(i)
+                i++
+                setTimeout(typewriter, speed)
+            }
+        }
         // Card machine
         function sceneClick(obj,trigger) {
             obj.classList.remove('invisible')
@@ -94,15 +104,14 @@
             'droppable:drop': function (e) {
                 swipe.fire()
 
-                let typed1 = new Typed('#typed', {
-                    strings: ["There's only so much...", " "],
-                    showCursor: false,
-                    typeSpeed: 20
-                });
+                typewriter()
 
                 container.style.display = 'none'
                 setTimeout(function() {
                     sceneClick(notifications,phoneTrigger)
+                    i = 0
+                    typed.innerHTML = ""
+                    txt = "a dog can handle..."
                 }, 3500)
             }
         });
@@ -151,14 +160,13 @@
                 doneReading.fire()
                 notifications.style.display = 'none'
 
-                typed1 = new Typed('#typed', {
-                        strings: ["a dog can handle...", " "],
-                        showCursor: false,
-                        typeSpeed: 0
-                    });
-
+                typewriter()
+                
                 setTimeout(function() {
                     sceneClick(throwContainer,thrownTrigger)
+                    i = 0
+                    typed.innerHTML = ""
+                    txt = "before resolving..."
                 }, 3500)
             }, 5000)
         })
@@ -196,14 +204,11 @@
                 else if (count === 20) {
                     cracked.fire()
 
-                    let typed3 = new Typed('#typed', {
-                        strings: ["before resolving...", " "],
-                        showCursor: false,
-                        typeSpeed: 20
-                    });
+                    typewriter()
 
                     setTimeout(function() {
                         titleTrigger.fire()
+                        typed.innerHTML = ""
                     }, 3500)
                 }
             })
@@ -213,17 +218,15 @@
             'droppable:drop': function (e) {
                 thrown.fire()
 
-                let typed4 = new Typed('#typed', {
-                    strings: ["to their instincts.", " "],
-                    showCursor: false,
-                    typeSpeed: 20
-                });
-
                 setTimeout(function() {
                     thrownMessage.fire()
+                    typewriter()
                     throwContainer.style.display = "none"
                     setTimeout(function() {
                         crackedClick()
+                        i = 0
+                        typed.innerHTML = ""
+                        txt = "to their instincts."
                     }, 3500)  
                 }, 1500)
                      
