@@ -13,44 +13,46 @@
     </header>
     <main>
         <div class="wrapper">
-            <canvas id="canvas" width="1600" height="800"></canvas>
-            <div class="card-container">
-                <span id="typed"></span>
-                <!-- Card -->
-                <div class="container" id="start-container">
-                    <div id="card">
-                        <img src="media/svg/card.svg" alt="">
-                    </div>
-                </div>
-                <div class="container" id="end-container"></div>
-
-                <!-- Phone notifications -->
-                <div class="notifications invisible custom-cursor">
-                    <div class="notification" id="boss">
-                        <h4>Boss</h4>
-                        <p>view notification</p>
-                    </div>
-                    <div class="notification" id="mom">
-                        <h4>Mom</h4>
-                        <p>view notification</p>
-                    </div>
-                    <div class="notification" id=gf>
-                        <h4>Girlfriend</h4>
-                        <p>view notification</p>
-                    </div>
-                </div>
-
-                <!-- Throw scene -->
-                <div class="throw-scene invisible">
-                    <div class="wall"></div>
-                    <div id="start-container-throw">
-                        <div id="character">
-                            <img src="media/svg/thrown-character.svg" alt="">
+            <div id="glitch-container">
+                <canvas id="canvas" width="1600" height="800"></canvas>
+                <div class="card-container">
+                    <span id="typed"></span>
+                    <!-- Card -->
+                    <div class="container" id="start-container">
+                        <div id="card">
+                            <img src="media/svg/card.svg" alt="">
                         </div>
                     </div>
-                    <div id="end-container-throw"></div>
+                    <div class="container" id="end-container"></div>
+
+                    <!-- Phone notifications -->
+                    <div class="notifications invisible custom-cursor">
+                        <div class="notification" id="boss">
+                            <h4>Boss</h4>
+                            <p>view notification</p>
+                        </div>
+                        <div class="notification" id="mom">
+                            <h4>Mom</h4>
+                            <p>view notification</p>
+                        </div>
+                        <div class="notification" id=gf>
+                            <h4>Girlfriend</h4>
+                            <p>view notification</p>
+                        </div>
+                    </div>
+
+                    <!-- Throw scene -->
+                    <div class="throw-scene invisible">
+                        <div class="wall"></div>
+                        <div id="start-container-throw">
+                            <div id="character">
+                                <img src="media/svg/thrown-character.svg" alt="">
+                            </div>
+                        </div>
+                        <div id="end-container-throw"></div>
+                    </div>
+                    
                 </div>
-                
             </div>
         </div>
     </main>
@@ -64,6 +66,8 @@
         const endContainer = document.querySelector('#end-container')
         const notifications = document.querySelector('.notifications')
         const typed = document.querySelector('#typed')
+        const canvas = document.querySelector('#canvas')
+        const wrapper = document.querySelector('.wrapper')
 
         let swipe = ''
         let doneReading = ''
@@ -74,6 +78,7 @@
         let secondCrack = ''
         let thirdCrack = ''
         let titleTrigger = ''
+        
 
         let i = 0
         let speed = 50
@@ -103,12 +108,15 @@
         new agnosticDraggable.Droppable(endContainer,{}, {
             'droppable:drop': function (e) {
                 swipe.fire()
+                wrapper.style.setProperty("--glitch-visible","100%")
 
                 typewriter()
 
                 container.style.display = 'none'
                 setTimeout(function() {
                     sceneClick(notifications,phoneTrigger)
+                    wrapper.style.setProperty("--glitch-background","url(media/images/scene-04.png)")
+                    wrapper.style.setProperty("--glitch-visible","0%")
                     i = 0
                     typed.innerHTML = ""
                     txt = "a dog can handle..."
@@ -159,11 +167,14 @@
             setTimeout(function() {
                 doneReading.fire()
                 notifications.style.display = 'none'
+                wrapper.style.setProperty("--glitch-visible","100%")
 
                 typewriter()
                 
                 setTimeout(function() {
                     sceneClick(throwContainer,thrownTrigger)
+                    wrapper.style.setProperty("--glitch-background","url(media/images/scene-05.png)")
+                    wrapper.style.setProperty("--glitch-visible","0%")
                     i = 0
                     typed.innerHTML = ""
                     txt = "before resolving..."
@@ -194,6 +205,7 @@
 
                 if (count === 5) {
                     firstCrack.fire()
+                    wrapper.style.setProperty("--glitch-visible","100%")
                 }
                 else if (count === 10) {
                     secondCrack.fire()
@@ -203,12 +215,24 @@
                 }
                 else if (count === 20) {
                     cracked.fire()
+                    wrapper.style.setProperty("--glitch-background","url(media/images/scene-08.png)")
 
                     typewriter()
 
                     setTimeout(function() {
                         titleTrigger.fire()
+                        wrapper.style.setProperty("--glitch-visible","0%")
+                        wrapper.style.setProperty("--glitch-background","url(media/images/scene-09.png)")
                         typed.innerHTML = ""
+
+                        setTimeout(function() {
+                            wrapper.style.setProperty("--glitch-visible","100%")
+
+                            setTimeout(function() {
+                                wrapper.style.setProperty("--glitch-visible","0%")
+                                
+                            },2000)
+                        },3000)
                     }, 3500)
                 }
             })
@@ -220,10 +244,13 @@
 
                 setTimeout(function() {
                     thrownMessage.fire()
+                    wrapper.style.setProperty("--glitch-visible","100%")
                     typewriter()
                     throwContainer.style.display = "none"
                     setTimeout(function() {
                         crackedClick()
+                        wrapper.style.setProperty("--glitch-background","url(media/images/scene-07.png)")
+                        wrapper.style.setProperty("--glitch-visible","0%")
                         i = 0
                         typed.innerHTML = ""
                         txt = "to their instincts."
@@ -253,7 +280,7 @@
                 crackedTrigger = inputs.find(i => i.name === 'cracked-trigger')
                 thrownMessage = inputs.find(i => i.name === 'thrown-message')
                 titleTrigger = inputs.find(i => i.name === 'title-trigger')
-            }
+            } 
         });
     </script>
 </body>
