@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg id="Layer_1" data-name="Layer 1" xmlns="http://www.w3.org/2000/svg" width="433.37" height="195.06" viewBox="0 0 433.37 195.06">
+  <defs>
+    <style>
+      .cls-1 {
+        fill: #2d3d48;
+        font-family: CaptainComic, Captain Comic;
+        font-size: 23.77px;
+      }
+
+      .cls-2 {
+        fill: #fff;
+        stroke: #2d3d48;
+        stroke-miterlimit: 10;
+        stroke-width: 3px;
+      }
+
+      .cls-3 {
+        letter-spacing: -.06em;
+      }
+
+      .cls-4 {
+        letter-spacing: -.08em;
+      }
+    </style>
+  </defs>
+  <path class="cls-2" d="M2.86,42.92l112.64,24.14S142.95-.5,272.97,1.55c75.93,1.2,166.51,40.68,158.38,123.13-8.81,89.34-227.11,88.26-319.3,17.1C10.91,57.87,2.86,42.92,2.86,42.92Z"/>
+  <text class="cls-1" transform="translate(164.51 89.68)"><tspan x="0" y="0">i should read </tspan><tspan class="cls-3" x="187.12" y="0">m</tspan><tspan x="206.23" y="0">y </tspan><tspan x="22.65" y="28.52">notific</tspan><tspan class="cls-4" x="113.63" y="28.52">a</tspan><tspan x="126.85" y="28.52">tions</tspan></text>
+</svg>

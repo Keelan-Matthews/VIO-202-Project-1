@@ -25,6 +25,7 @@ body {
     z-index: 5;
     animation: float 6s ease-in-out infinite;
     border-radius: 20px;
+    cursor: grab;
 }
 
 #card img {
@@ -39,6 +40,17 @@ body {
     letter-spacing: 1px;
     left: 30px;
     top: 30px;
+}
+
+#instructions {
+    color: white;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    letter-spacing: 1px;
+    position: absolute;
+    font-size: 30px;
+    left: 650px;
+    top: 700px;
+    font-weight: bold;
 }
 
 .wrapper {
@@ -174,6 +186,29 @@ body {
     margin: 7px;
     background-color: rgb(255, 252, 246);
     transition: transform 0.5s ease;
+    opacity: 0;
+    animation: pop-up 0.7s ease;
+    animation-fill-mode: forwards;
+    
+}
+
+.notification:nth-child(2) {
+    animation-delay: 0.3s;
+}
+
+.notification:nth-child(3) {
+    animation-delay: 0.5s;
+}
+
+@keyframes pop-up {
+    0% {
+        transform: translateX(-70px) scale(0.6);
+        opacity: 0;
+    }
+    100% {
+        transform: translateX(0px) scale(1);
+        opacity: 1;
+    }
 }
 
 .notification p {
@@ -208,3 +243,51 @@ body {
 		transform: translatey(0px);
 	}
 }
+
+.speech {
+    position: absolute;
+    left: 30px;
+    top: 30px;
+    animation: fade-in 1s ease;
+}
+
+@keyframes fade-in {
+    0% {
+        opacity: 0;
+    }
+
+    100% {
+        opacity: 1;
+    }
+}
+
+.arrow {
+    position: absolute;
+    width: 70px;
+    left: 880px;
+    top: 280px;
+    -webkit-animation: slide-right 0.9s cubic-bezier(0.250, 0.460, 0.450, 0.940) infinite alternate-reverse both;
+	        animation: slide-right 0.9s cubic-bezier(0.250, 0.460, 0.450, 0.940) infinite alternate-reverse both;
+}
+
+@-webkit-keyframes slide-right {
+    0% {
+      -webkit-transform: translateX(0);
+              transform: translateX(0);
+    }
+    100% {
+      -webkit-transform: translateX(60px);
+              transform: translateX(60px);
+    }
+  }
+  @keyframes slide-right {
+    0% {
+      -webkit-transform: translateX(0);
+              transform: translateX(0);
+    }
+    100% {
+      -webkit-transform: translateX(60px);
+              transform: translateX(60px);
+    }
+  }
+  

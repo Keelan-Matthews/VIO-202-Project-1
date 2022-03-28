@@ -15,6 +15,10 @@
         <div class="wrapper">
             <div id="glitch-container">
                 <canvas id="canvas" width="1600" height="800"></canvas>
+                <img src="media/svg/card-speech.svg" alt="" class="speech" id="speech-1">
+                <img src="media/svg/phone-speech.svg" alt="" class="speech invisible" id="speech-2">
+                <img src="media/svg/arrow.svg" alt="" class="arrow invisible">
+                <span id="instructions"></span>
                 <div class="card-container">
                     <span id="typed"></span>
                     <!-- Card -->
@@ -68,6 +72,11 @@
         const typed = document.querySelector('#typed')
         const canvas = document.querySelector('#canvas')
         const wrapper = document.querySelector('.wrapper')
+        const speechOne = document.querySelector('#speech-1')
+        const speechTwo = document.querySelector('#speech-2')
+        const arrow = document.querySelector('.arrow')
+        const myCharacter = document.querySelector('#character')
+        const instructions = document.querySelector('#instructions')
 
         let swipe = ''
         let doneReading = ''
@@ -109,6 +118,7 @@
             'droppable:drop': function (e) {
                 swipe.fire()
                 wrapper.style.setProperty("--glitch-visible","100%")
+                speechOne.style.display = "none"
 
                 typewriter()
 
@@ -117,9 +127,19 @@
                     sceneClick(notifications,phoneTrigger)
                     wrapper.style.setProperty("--glitch-background","url(media/images/scene-04.png)")
                     wrapper.style.setProperty("--glitch-visible","0%")
+
                     i = 0
                     typed.innerHTML = ""
                     txt = "a dog can handle..."
+                    setTimeout(function() {
+                        speechTwo.classList.remove('invisible')
+                        setTimeout(function() {
+                            speechTwo.classList.add('invisible')
+                            setTimeout(function() {
+                                speechTwo.classList.remove('invisible')
+                            },3000)
+                        },5000)
+                    },3000)
                 }, 3500)
             }
         });
@@ -168,6 +188,7 @@
                 doneReading.fire()
                 notifications.style.display = 'none'
                 wrapper.style.setProperty("--glitch-visible","100%")
+                speechTwo.style.display = "none"
 
                 typewriter()
                 
@@ -175,6 +196,17 @@
                     sceneClick(throwContainer,thrownTrigger)
                     wrapper.style.setProperty("--glitch-background","url(media/images/scene-05.png)")
                     wrapper.style.setProperty("--glitch-visible","0%")
+
+                    arrow.classList.remove('invisible')
+
+                    instructions.innerHTML = "Drag him into the dumpster"
+
+                    myCharacter.addEventListener('mousemove',characterevent)
+                    function characterevent() {
+                        arrow.style.display = "none"
+                        myCharacter.removeEventListener('mousemove',characterevent)
+                    }
+
                     i = 0
                     typed.innerHTML = ""
                     txt = "before resolving..."
@@ -215,13 +247,16 @@
                 }
                 else if (count === 20) {
                     cracked.fire()
+                    instructions.innerHTML = ""
                     wrapper.style.setProperty("--glitch-background","url(media/images/scene-08.png)")
+                    setTimeout(function() {
+                         wrapper.style.setProperty("--glitch-visible","0%")
+                    },2500)
 
                     typewriter()
 
                     setTimeout(function() {
                         titleTrigger.fire()
-                        wrapper.style.setProperty("--glitch-visible","0%")
                         wrapper.style.setProperty("--glitch-background","url(media/images/scene-09.png)")
                         typed.innerHTML = ""
 
@@ -241,6 +276,7 @@
         new agnosticDraggable.Droppable(endContainerThrow,{}, {
             'droppable:drop': function (e) {
                 thrown.fire()
+                instructions.innerHTML = ""
 
                 setTimeout(function() {
                     thrownMessage.fire()
@@ -251,11 +287,14 @@
                         crackedClick()
                         wrapper.style.setProperty("--glitch-background","url(media/images/scene-07.png)")
                         wrapper.style.setProperty("--glitch-visible","0%")
+                        instructions.innerHTML = "Spam any key on the keyboard"
+                        instructions.style.left = "550px"
+                        instructions.style.top = "750px"
                         i = 0
                         typed.innerHTML = ""
                         txt = "to their instincts."
                     }, 3500)  
-                }, 1500)
+                }, 2000)
                      
             }
         });
