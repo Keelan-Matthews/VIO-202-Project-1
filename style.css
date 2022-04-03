@@ -32,9 +32,9 @@ body {
     width: 300px;
 }
 
-#typed {
+.typed-message {
     position: relative;
-    font-size: 50px;
+    font-size: 40px;
     color: white;
     font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
     letter-spacing: 1px;
@@ -249,6 +249,7 @@ body {
     left: 30px;
     top: 30px;
     animation: fade-in 1s ease;
+    width: 400px;
 }
 
 @keyframes fade-in {
