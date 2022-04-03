@@ -94,12 +94,15 @@
         const riser = new Audio('media/audio/riser.mp3')
         const restaurant = new Audio('media/audio/restaurant.mp3')
         const crack = new Audio('media/audio/crack.mp3')
-        restaurant.play()
         
         var audioElement0 = document.createElement('audio');
         audioElement0.setAttribute('src', 'media/audio/background.mp3');
-        audioElement0.setAttribute('autoplay', 'autoplay');
         audioElement0.loop = true;
+
+        window.addEventListener('click', function() {
+            audioElement0.play()
+            restaurant.play()
+        })
 
         let swipe = ''
         let doneReading = ''
