@@ -101,11 +101,14 @@
         audioElement0.setAttribute('src', 'media/audio/background.mp3');
         audioElement0.loop = true;
 
-        window.addEventListener('click', function() {
+        window.addEventListener('click', init)
+
+        function init() {
             audioElement0.play()
             restaurant.play()
             start.style.display = 'none';
-        })
+            window.removeEventListener('click', init)
+        }
 
         let swipe = ''
         let doneReading = ''

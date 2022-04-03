@@ -314,6 +314,7 @@ body {
     justify-content: center;
     align-items: center;
     transition: 1s ease;
+    cursor: pointer;
 }
 
 .click-to-start div:hover {
@@ -322,6 +323,7 @@ body {
 }
 
 .click-to-start p {
+    cursor: pointer;
     font-size: 40px;
     font-weight: bold;
 }
