@@ -303,7 +303,7 @@ body {
     align-items: center;
 }
 
-.click-to-start div {
+.click-to-start div, .cta {
     background-color: #6fcacd;
     width: 300px;
     height: 100px;
@@ -317,13 +317,47 @@ body {
     cursor: pointer;
 }
 
+.cta {
+    position: absolute;
+    left: 1250px;
+    top: 670px;
+    z-index: 99999;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
 .click-to-start div:hover {
     background-color: #f16a97;
     transform: scale(1.1);
 }
 
-.click-to-start p {
+.cta:hover {
+    background-color: #f16a97;
+    transform: scale(1.1);
+}
+
+.click-to-start p, .cta {
     cursor: pointer;
     font-size: 40px;
     font-weight: bold;
+}
+
+.utility {
+    width: 80px;
+    height: 80px;
+    border-radius: 100%;
+    background-color: rgb(182, 182, 182);
+    margin: 20px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.utility img {
+    width: 50px;
+}
+
+main {
+    display: flex;
 }

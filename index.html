@@ -62,7 +62,13 @@
                     
                 </div>
             </div>
+            <div class="cta"><p>Read Comic</p></div>
         </div>
+        <div>
+            <div id="restart" class="utility"><img src="https://img.icons8.com/ios-glyphs/30/000000/refresh--v1.png"/></div>
+            <div id="mute" class="utility"><img src="https://img.icons8.com/ios-filled/50/000000/high-volume--v1.png"/></div>
+        </div>
+        
     </main>
     <script src="https://unpkg.com/@rive-app/webgl"></script>
     <script src="https://cdn.jsdelivr.net/npm/agnostic-draggable@latest/dist/agnostic-draggable.min.js"></script>
@@ -86,6 +92,11 @@
         const instructions = document.querySelector('#instructions')
         const typedMessage = document.querySelector('.typed-message')
         const start = document.querySelector('.click-to-start')
+        const muteButton = document.getElementById('mute')
+        const restartButton = document.getElementById('restart')
+        const wall = document.querySelector('.wall')
+        const cta = document.querySelector('.cta')
+        cta.style.display = 'none'
 
         const cardBeep = new Audio('media/audio/beep.mp3')
         const glitch = new Audio('media/audio/glitch.mp3')
@@ -119,7 +130,71 @@
         let secondCrack = ''
         let thirdCrack = ''
         let titleTrigger = ''
+        let restartTrigger = ''
+
+        let muted = false;
+        muteButton.addEventListener('click', function() {
+            muted = !muted;
+
+            if (muted) {
+                cardBeep.muted = true;
+                glitch.muted = true;
+                crash.muted = true;
+                shatter.muted = true;
+                notification.muted = true;
+                audioElement1.muted = true;
+                riser.muted = true;
+                restaurant.muted = true;
+                crack.muted = true;
+                audioElement0.muted = true;
+                muteButton.innerHTML = '<img src="https://img.icons8.com/ios-filled/50/000000/mute--v1.png"/>'
+            }
+            else {
+                cardBeep.muted = false;
+                glitch.muted = false;
+                crash.muted = false;
+                shatter.muted = false;
+                notification.muted = false;
+                audioElement1.muted = false;
+                riser.muted = false;
+                restaurant.muted = false;
+                crack.muted = false;
+                audioElement0.muted = false;
+                muteButton.innerHTML = '<img src="https://img.icons8.com/ios-filled/50/000000/high-volume--v1.png"/>'
+            }
+        })
+
+        restartButton.addEventListener('click', function() {
+            location.reload();
+        })
+
+        cta.addEventListener('click', function() {
+            location.reload()
+        })
         
+        // restartButton.addEventListener('click', function() {
+        //     restaurant.play()
+        //     traffic.pause()
+        //     riser.pause()
+
+        //     container.style.display = 'block'
+        //     container.style.left = '140px'
+        //     container.style.top = '700px'
+        //     speechOne.style.display = "block"
+            
+        //     speechTwo.classList.add('invisible')
+        //     notifications.classList.add('invisible')
+
+        //     throwContainer.style.display = 'none'
+        //     throwContainer.style.left = '1050px'
+        //     throwContainer.style.top = '140px'
+
+        //     instructions.innerHTML = ""
+        //     wall.classList.add('invisible')
+
+        //     if (restartTrigger)
+        //         restartTrigger.fire();
+        // })
 
         let i = 0
         let speed = 50
@@ -198,9 +273,6 @@
                         speechTwo.classList.remove('invisible')
                         setTimeout(function() {
                             speechTwo.classList.add('invisible')
-                            setTimeout(function() {
-                                speechTwo.classList.remove('invisible')
-                            },3000)
                         },5000)
                     },3000)
                 }, 3500)
@@ -268,6 +340,7 @@
                     wrapper.style.setProperty("--glitch-visible","0%")
 
                     arrow.classList.remove('invisible')
+                    wall.classList.remove('invisible')
 
                     instructions.innerHTML = "Drag him into the dumpster"
 
@@ -342,6 +415,7 @@
                         typed2.innerHTML = ""
                         typed3.innerHTML = ""
                         typed4.innerHTML = ""
+                        cta.style.display = 'flex'
 
                         setTimeout(function() {
                             wrapper.style.setProperty("--glitch-visible","100%")
