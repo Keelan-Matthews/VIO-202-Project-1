@@ -326,6 +326,11 @@ body {
     align-items: center;
 }
 
+.cta a {
+    text-decoration: none;
+    color: white;
+}
+
 .click-to-start div:hover {
     background-color: #f16a97;
     transform: scale(1.1);
@@ -364,6 +369,15 @@ main {
 .border-black {
     border: 1px solid black;
     padding: 12px;
+    transition: 0.3s ease;
+}
+
+.border-black:hover {
+    background-color: black;
+}
+
+.border-black:hover a {
+    color: white;
 }
 
 .header {
